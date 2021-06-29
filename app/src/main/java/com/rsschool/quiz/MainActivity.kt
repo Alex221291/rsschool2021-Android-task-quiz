@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity(), Navigator {
 
     private lateinit var binding: ActivityMainBinding
 
-    var numberAnswers = arrayOf(-1, -1, -1, -1, -1)
-    var answers = arrayOf("", "", "", "", "")
+    private var numberAnswers = arrayOf(-1, -1, -1, -1, -1)
+    private var textAnswers = arrayOf("", "", "", "", "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +34,10 @@ class MainActivity : AppCompatActivity(), Navigator {
         viewPager.isUserInputEnabled = false
     }
 
-    override fun onNext(numberAnswer : Int, answer : String) {
+    override fun onNext(numberAnswer : Int, textAnswer : String) {
 
         numberAnswers[viewPager.currentItem] = numberAnswer
-        answers[viewPager.currentItem] = answer
+        textAnswers[viewPager.currentItem] = textAnswer
 
         viewPager.currentItem += 1
 
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(), Navigator {
         var msg = ""
         for (i in numberAnswers.indices) {
             if (QuestionList.questions[i].correctAnswer == numberAnswers[i]) numberCorrectAnswers++
-            msg += "${i + 1}. ${QuestionList.questions[i].questionText}\nВаш ответ: ${answers[i]}\n\n"
+            msg += "${i + 1}. ${QuestionList.questions[i].questionText}\nВаш ответ: ${textAnswers[i]}\n\n"
         }
         val res = "Ваш результат: ${numberCorrectAnswers * 100 / numberAnswers.size}%"
         msg = "$res\n\n$msg"
